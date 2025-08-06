@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quick Mart - Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f9f9f9;
+    }
+    header {
+      text-align: center;
+      background-color: #4CAF50;
+      color: white;
+      padding: 20px;
+      font-size: 2em;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+    form {
+      max-width: 300px;
+      margin: 50px auto;
+      padding: 15px;
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    form label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+    form input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    form button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <header>Quick Mart</header>
+
+  <form id="loginForm">
+    <label for="aadhaar">Aadhaar Number:</label>
+    <input type="text" id="aadhaar" name="aadhaar" placeholder="Enter your Aadhaar number" maxlength="12" pattern="\d{12}" required />
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" placeholder="Enter your password" required />
+
+    <button type="submit">Sign In</button>
+  </form>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const aadhaar = document.getElementById('aadhaar').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (!/^\d{12}$/.test(aadhaar)) {
+        alert('Please enter a valid 12-digit Aadhaar number.');
+        return;
+      }
+
+      if (password.length < 6) {
+        alert('Password must be at least 6 characters.');
+        return;
+      }
+
+      // On successful validation, redirect to appliances.html
+      window.location.href = 'appliances.html';
+    });
+  </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quick Mart - Appliances A to Z</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f2f2f2;
+    }
+    header {
+      text-align: center;
+      background-color: #2196F3;
+      color: white;
+      padding: 20px;
+      font-size: 2em;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+    }
+    .appliance-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .appliance-item {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+    .appliance-item:hover {
+      transform: scale(1.05);
+    }
+    .appliance-item img {
+      width: 100%;
+      height: 150px;
+      object-fit: contain;
+      margin-bottom: 10px;
+      border-radius: 6px;
+    }
+    .appliance-item h3 {
+      margin: 0;
+      font-size: 1.1em;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <header>Quick Mart - Appliances A to Z</header>
+
+  <div class="appliance-grid">
+    <div class="appliance-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/1027/1027943.png" alt="Air Conditioner" />
+      <h3>Air Conditioner</h3>
+    </div>
+    <div class="appliance-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/2907/2907703.png" alt="Blender" />
+      <h3>Blender</h3>
+    </div>
+    <div class="appliance-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/2983/2983829.png" alt="Coffee Maker" />
+      <h3>Coffee Maker</h3>
+    </div>
+    <div class="appliance-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/3069/3069122.png" alt="Dishwasher" />
+      <h3>Dishwasher</h3>
+    </div>
+    <div class="appliance-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/2913/2913501.png" alt="Electric Kettle" />
+      <h3>Electric Kettle</h3>
+    </div>
+    <div class="appliance-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/3003/3003981.png" alt="Fan" />
+      <h3>Fan</h3>
+    </div>
+    <div class="appliance-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/2712/2712602.png" alt="Garbage Disposal" />
+      <h3>Garbage Disposal</h3>
+    </div>
+    <div class="appliance-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/2543/2543930.png" alt="Hair Dryer" />
+      <h3>Hair Dryer</h3>
+    </div>
+    <div class="appliance-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/2644/2644873.png" alt="Iron" />
+      <h3>Iron</h3>
+    </div>
+    <div class="appliance-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/3050/3050900.png" alt="Juicer" />
+      <h3>Juicer</h3>
+    </div>
+    <div class="appliance-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/2659/2659991.png" alt="Kettle" />
+      <h3>Kettle</h3>
+    </div>
+    <div class="appliance-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" alt="Microwave" />
+      <h3>Microwave</h3>
+    </div>
+    <div class="appliance-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/2873/2873887.png" alt="Neon Light" />
+      <h3>Neon Light</h3>
+    </div>
+    <div class="appliance-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/2907/2907942.png" alt="Oven" />
+      <h3>Oven</h3>
+    </div>
+    <div class="appliance-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/3043/3043766.png" alt="Projector" />
+      <h3>Projector</h3>
+    </div>
+    <div class="appliance-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/1507/1507209.png" alt="Refrigerator" />
+      <h3>Refrigerator</h3>
+    </div>
+    <div class="appliance-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/2932/2932499.png" alt="Toaster" />
+      <h3>Toaster</h3>
+    </div>
+    <div class="appliance-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/2482/2482597.png" alt="Vacuum Cleaner" />
+      <h3>Vacuum Cleaner</h3>
+    </div>
+    <div class="appliance-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/201/201623.png" alt="Washing Machine" />
+      <h3>Washing Machine</h3>
+    </div>
+    <div class="appliance-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/4281/4281523.png" alt="Xerox Machine" />
+      <h3>Xerox Machine</h3>
+    </div>
+    <div class="appliance-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="Yoga Mat" />
+      <h3>Yoga Mat</h3>
+    </div>
+    <div class="appliance-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt="Zebra Lamp" />
+      <h3>Zebra Lamp</h3>
+    </div>
+  </div>
+
+</body>
+</html>
