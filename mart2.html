@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quick Mart - Appliances A to Z</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f2f2f2;
+    }
+    header {
+      text-align: center;
+      background-color: #2196F3;
+      color: white;
+      padding: 20px;
+      font-size: 2em;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+    nav {
+      max-width: 1000px;
+      margin: 0 auto 20px;
+      text-align: right;
+    }
+    nav button {
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    nav button:hover {
+      background-color: #45a049;
+    }
+    .appliance-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .appliance-item {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+    .appliance-item:hover {
+      transform: scale(1.05);
+    }
+    .appliance-item img {
+      width: 100%;
+      height: 150px;
+      object-fit: contain;
+      margin-bottom: 10px;
+      border-radius: 6px;
+    }
+    .appliance-item h3 {
+      margin: 0 0 10px 0;
+      font-size: 1.1em;
+      color: #333;
+    }
+    .appliance-item button {
+      padding: 8px 12px;
+      background-color: #ff5722;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .appliance-item button:hover {
+      background-color: #e64a19;
+    }
+  </style>
+</head>
+<body>
+
+  <header>Quick Mart - Appliances A to Z</header>
+  <nav>
+    <button id="goToCart">Go to Cart 🛒</button>
+  </nav>
+
+  <div class="appliance-grid" id="applianceGrid">
+    <!-- Items inserted by JS -->
+  </div>
+
+  <script>
+    const items = [
+      {id:1, name:'Air Conditioner', price:25000, img:'https://cdn-icons-png.flaticon.com/512/1027/1027943.png'},
+      {id:2, name:'Blender', price:3000, img:'https://cdn-icons-png.flaticon.com/512/2907/2907703.png'},
+      {id:3, name:'Coffee Maker', price:4500, img:'https://cdn-icons-png.flaticon.com/512/2983/2983829.png'},
+      {id:4, name:'Dishwasher', price:28000, img:'https://cdn-icons-png.flaticon.com/512/3069/3069122.png'},
+      {id:5, name:'Electric Kettle', price:1500, img:'https://cdn-icons-png.flaticon.com/512/2913/2913501.png'},
+      {id:6, name:'Fan', price:2200, img:'https://cdn-icons-png.flaticon.com/512/3003/3003981.png'},
+      {id:7, name:'Garbage Disposal', price:8000, img:'https://cdn-icons-png.flaticon.com/512/2712/2712602.png'},
+      {id:8, name:'Hair Dryer', price:1200, img:'https://cdn-icons-png.flaticon.com/512/2543/2543930.png'},
+      {id:9, name:'Iron', price:1800, img:'https://cdn-icons-png.flaticon.com/512/2644/2644873.png'},
+      {id:10, name:'Juicer', price:3500, img:'https://cdn-icons-png.flaticon.com/512/3050/3050900.png'},
+      {id:11, name:'Kettle', price:1600, img:'https://cdn-icons-png.flaticon.com/512/2659/2659991.png'},
+      {id:12, name:'Microwave', price:9000, img:'https://cdn-icons-png.flaticon.com/512/3075/3075977.png'},
+      {id:13, name:'Neon Light', price:1100, img:'https://cdn-icons-png.flaticon.com/512/2873/2873887.png'},
+      {id:14, name:'Oven', price:15000, img:'https://cdn-icons-png.flaticon.com/512/2907/2907942.png'},
+      {id:15, name:'Projector', price:25000, img:'https://cdn-icons-png.flaticon.com/512/3043/3043766.png'},
+      {id:16, name:'Refrigerator', price:35000, img:'https://cdn-icons-png.flaticon.com/512/1507/1507209.png'},
+      {id:17, name:'Toaster', price:2500, img:'https://cdn-icons-png.flaticon.com/512/2932/2932499.png'},
+      {id:18, name:'Vacuum Cleaner', price:7500, img:'https://cdn-icons-png.flaticon.com/512/2482/2482597.png'},
+      {id:19, name:'Washing Machine', price:30000, img:'https://cdn-icons-png.flaticon.com/512/201/201623.png'},
+      {id:20, name:'Xerox Machine', price:15000, img:'https://cdn-icons-png.flaticon.com/512/4281/4281523.png'},
+      {id:21, name:'Yoga Mat', price:1000, img:'https://cdn-icons-png.flaticon.com/512/1046/1046784.png'},
+      {id:22, name:'Zebra Lamp', price:1800, img:'https://cdn-icons-png.flaticon.com/512/2991/2991148.png'},
+    ];
+
+    const grid = document.getElementById('applianceGrid');
+
+    function renderItems() {
+      grid.innerHTML = '';
+      items.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'appliance-item';
+        div.innerHTML = `
+          <img src="${item.img}" alt="${item.name}" />
+          <h3>${item.name}</h3>
+          <p>₹${item.price.toLocaleString()}</p>
+          <button data-id="${item.id}">Add to Cart</button>
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    renderItems();
+
+    grid.addEventListener('click', (e) => {
+      if (e.target.tagName === 'BUTTON') {
+        const id = +e.target.getAttribute('data-id');
+        const selectedItem = items.find(i => i.id === id);
+        addToCart(selectedItem);
+      }
+    });
+
+    function addToCart(item) {
+      let cart = JSON.parse(localStorage.getItem('quickMartCart')) || [];
+      const existing = cart.find(i => i.id === item.id);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({...item, qty: 1});
+      }
+      localStorage.setItem('quickMartCart', JSON.stringify(cart));
+      alert(`${item.name} added to cart.`);
+    }
+
+    document.getElementById('goToCart').addEventListener('click', () => {
+      window.location.href = 'cart.html';
+    });
+  </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quick Mart - Your Cart & Checkout</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #fff;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    header {
+      text-align: center;
+      background-color: #FF5722;
+      color: white;
+      padding: 20px;
+      font-size: 2em;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+    marquee {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 0;
+      font-weight: bold;
+      margin-bottom: 20px;
+      border-radius: 6px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .total-row td {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    form {
+      background-color: #fafafa;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px #ccc;
+    }
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    form input, form textarea, form select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 1em;
+    }
+    form button {
+      background-color: #FF5722;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 1.1em;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+    }
+    form button:hover {
+      background-color: #e64a19;
+    }
+    .empty-cart {
+      text-align: center;
+      font-size: 1.3em;
+      color: #777;
+      margin: 40px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>Quick Mart - Your Cart & Checkout</header>
+
+  <marquee id="orderMarquee" style="display:none;">
+    🎉 Your order is successful! Thank you for shopping with Quick Mart! 🎉
+  </marquee>
+
+  <div id="cartSection">
+    <table id="cartTable">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Qty</th>
+          <th>Price (₹)</th>
+          <th>Subtotal (₹)</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Cart items inserted by JS -->
+      </tbody>
+      <tfoot>
+        <tr class="total-row">
+          <td colspan="3">Total</td>
+          <td id="totalAmount">₹0</td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div id="emptyMessage" class="empty-cart" style="display:none;">
+    Your cart is empty. <a href="appliances.html">Shop now</a>.
+  </div>
+
+  <form id="checkoutForm" style="display:none;">
+    <h2>Delivery Address</h2>
+    <label for="name">Full Name</label>
+    <input type="text" id="name" placeholder="Your full name" required />
+
+    <label for="address">Address</label>
+    <textarea id="address" rows="3" placeholder="Delivery address" required></textarea>
+
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" placeholder="10-digit phone number" pattern="[0-9]{10}" required />
+
+    <h2>Payment Details</h2>
+    <label for="cardNumber">Card Number</label>
+    <input type="text" id="cardNumber" placeholder="xxxx-xxxx-xxxx-xxxx" pattern="[0-9]{16}" maxlength="16" required />
+
+    <label for="expiry">Expiry Date (MM/YY)</label>
+    <input type="text" id="expiry" placeholder="MM/YY" pattern="(0[1-9]|1[0-2])\/\d{2}" required />
+
+    <label for="cvv">CVV</label>
+    <input type="password" id="cvv" placeholder="3-digit CVV" pattern="[0-9]{3}" maxlength="3" required />
+
+    <button type="submit">Place Order</button>
+  </form>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem('quickMartCart')) || [];
+
+    const cartTableBody = document.querySelector('#cartTable tbody');
+    const totalAmountEl = document.getElementById('totalAmount');
+    const emptyMessage = document.getElementById('emptyMessage');
+    const cartSection = document.getElementById('cartSection');
+    const checkoutForm = document.getElementById('checkoutForm');
+    const orderMarquee = document.getElementById('orderMarquee');
+
+    function renderCart() {
+      if (cart.length === 0) {
+        cartSection.style.display = 'none';
+        checkoutForm.style.display = 'none';
+        emptyMessage.style.display = 'block';
+        return;
+      }
+      emptyMessage.style.display = 'none';
+      cartSection.style.display = 'block';
+      checkoutForm.style.display = 'block';
+
+      cartTableBody.innerHTML = '';
+      let total = 0;
+
+      cart.forEach(item => {
+        const subtotal = item.price * item.qty;
+        total += subtotal;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${item.name}</td>
+          <td>${item.qty}</td>
+          <td>₹${item.price.toLocaleString()}</td>
+          <td>₹${subtotal.toLocaleString()}</td>
+          <td><button data-id="${item.id}" class="removeBtn" style="background:#e53935;color:white;padding:5px 10px;border:none;border-radius:4px;cursor:pointer;">Remove</button></td>
+        `;
+        cartTableBody.appendChild(tr);
+      });
+
+      totalAmountEl.textContent = `₹${total.toLocaleString()}`;
+    }
+
+    renderCart();
+
+    cartTableBody.addEventListener('click', (e) => {
+      if (e.target.classList.contains('removeBtn')) {
+        const id = +e.target.getAttribute('data-id');
+        cart = cart.filter(item => item.id !== id);
+        localStorage.setItem('quickMartCart', JSON.stringify(cart));
+        renderCart();
+      }
+    });
+
+    checkoutForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Simple validation done by browser via required and pattern on inputs
+
+      // Clear cart
+      cart = [];
+      localStorage.removeItem('quickMartCart');
+
+      // Hide form and table
+      cartSection.style.display = 'none';
+      checkoutForm.style.display = 'none';
+
+      // Show marquee success message
+      orderMarquee.style.display = 'block';
+
+      // Optionally after some time, redirect to appliances or homepage
+      setTimeout(() => {
+        orderMarquee.style.display = 'none';
+        window.location.href = 'appliances.html';
+      }, 8000);
+    });
+  </script>
+
+</body>
+</html>
